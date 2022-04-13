@@ -3,7 +3,7 @@ title: "Tracking Antibodies"
 author: 
 - name: "SP"
 - name: "AM"
-description: "An ongoing experiment to track antibodies over time"
+description: "An ongoing experiment to track COVID-19 antibodies over time"
 date: 2022-04-08
 execute:
   warning: false
@@ -12,9 +12,11 @@ format:
   html:
     html-math-method: katex
     code-tools: true
+    code-fold: true
+    code-link: true
     self-contained: true
 categories: ["COVID-19", "Antibodies", "Public Health"]
-image: PBjorkman-CBarnes-SARS-CoV2-Antibodies-WEB.original.jpg
+image: img/PBjorkman-CBarnes.jpg
 ---
 
 ```{r}
