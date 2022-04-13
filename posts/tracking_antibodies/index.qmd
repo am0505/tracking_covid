@@ -16,7 +16,7 @@ format:
     code-link: true
     self-contained: true
 categories: ["COVID-19", "Antibodies", "Public Health"]
-image: img/PBjorkman-CBarnes.jpg
+image: feature.jpg
 ---
 
 ```{r}
