@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Tracking COVID-19"
+  site-url: https://www.am0505.github.io
+  description: "A repository for documenting research related to COVID-19"
   navbar:
     right:
       - about.qmd
@@ -11,6 +13,8 @@ website:
         href: https://github.com/am0505/tracking_covid
       - icon: twitter
         href: https://twitter.com/
+      - icon: rss
+        href: index.xml
 format:
   html:
     theme: Flatly

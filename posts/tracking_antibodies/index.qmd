@@ -11,12 +11,11 @@ execute:
 format:
   html:
     html-math-method: katex
-    code-tools: true
     code-fold: true
     code-link: true
     self-contained: true
 categories: ["COVID-19", "Antibodies", "Public Health"]
-image: feature.jpg
+image: "feature.jpg"
 ---
 
 ```{r}
@@ -52,6 +51,8 @@ vembedr::embed_youtube(id = "qCRwuxDpthY",
 ```
 
 ## Neutralizing Antibodies Against Coronaviruses
+
+[A SARS-CoV-2 S trimer bound by a neutralizing antibody.](https://www.caltech.edu/about/news/images-antibodies-they-neutralize-covid-19-virus)
 
 ```{r}
 #| fig-cap: A SARS-CoV-2 S trimer bound by a neutralizing antibody.

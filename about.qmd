@@ -2,7 +2,10 @@
 title: "About"
 image: profile.jpg
 about:
-  template: jolla
+  id: hero-heading
+  template: trestles # jolla
+  image-shape: round # rounded, rectangle
+  image-width: 15em
   links:
     - icon: twitter
       text: Twitter
