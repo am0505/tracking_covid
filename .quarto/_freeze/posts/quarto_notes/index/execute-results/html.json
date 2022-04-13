@@ -1,0 +1,16 @@
+{
+  "hash": "a3800e5f112b28ed536fef3ec48bbd99",
+  "result": {
+    "markdown": "---\ntitle: \"Notes on Quarto\"\nauthor: \"AM\"\ndraft: true\n---\n\n## Quarto vs Rmarkdown\n\n[Source](https://quarto.org/docs/tools/rstudio.html#knitr-engine)\n\nOne important difference between R Markdown documents and Quarto documents is that in Quarto chunk options are typically included in special comments at the top of code chunks rather than within the line that begins the chunk. For example:\n\n::: {.cell}\n::: {.cell-output-stderr}\n```\n`geom_smooth()` using formula 'y ~ x'\n```\n:::\n\n::: {.cell-output-stderr}\n```\nWarning: Removed 37 rows containing non-finite values (stat_smooth).\n```\n:::\n\n::: {.cell-output-stderr}\n```\nWarning: Removed 37 rows containing missing values (geom_point).\n```\n:::\n\n::: {.cell-output-display}\n![Air Quality](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\nQuarto uses this approach to both better accommodate longer options like fig-cap, fig-subcap, and fig-alt as well as to make it straightforward to edit chunk options within more structured editors that don't have an easy way to edit chunk metadata (e.g. most traditional notebook UIs).\n\nNote that if you prefer it is still possible to include chunk options on the first line (e.g. \\`\\`\\`{r, echo = FALSE}). That said, we recommend using the comment-based syntax to make documents more portable and consistent across execution engines.\n\nChunk options included this way use YAML syntax rather than R syntax for consistency with options provided in YAML front matter. You can still however use R code for option values by prefacing them with !expr. For example:\n\n> TODO - This is not working\n\n::: {.cell}\n\n:::",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

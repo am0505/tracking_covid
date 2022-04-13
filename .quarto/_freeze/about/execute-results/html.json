@@ -1,0 +1,14 @@
+{
+  "hash": "98d9dab7284a9d5ef5cee888f2370b31",
+  "result": {
+    "markdown": "---\ntitle: \"About\"\nimage: profile.jpg\nabout:\n  template: jolla\n  links:\n    - icon: twitter\n      text: Twitter\n      href: https://twitter.com\n    - icon: github\n      text: Github\n      href: https://github.com/am0505/tracking_covid\n---\n\n# Welcome !\n\n:::{#hero-heading}\n\nHi 👋 !\n\nThis is a repository for documenting research related to COVID-19.\n\nThis project is built using the programming language is [R](https://www.r-project.org) using the latest [Quarto](https://quarto.org/) publication infrastructure.\n\nWe will be updating research and information related to the ongoing COVID-19 pandemic and hopefully beyond that!\n\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

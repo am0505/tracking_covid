@@ -1,0 +1,27 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com/am0505/tracking_covid
+---
+
+# Welcome !
+
+:::{#hero-heading}
+
+Hi `r emo::ji("wave")` !
+
+This is a repository for documenting research related to COVID-19.
+
+This project is built using the programming language is [R](https://www.r-project.org) using the latest [Quarto](https://quarto.org/) publication infrastructure.
+
+We will be updating research and information related to the ongoing COVID-19 pandemic and hopefully beyond that!
+
+:::

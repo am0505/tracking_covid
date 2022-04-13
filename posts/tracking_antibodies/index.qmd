@@ -1,0 +1,114 @@
+---
+title: "Tracking Antibodies"
+author: 
+- name: "SP"
+- name: "AM"
+description: "An ongoing experiment to track antibodies over time"
+date: 2022-04-08
+execute:
+  warning: false
+  message: false
+format:
+  html:
+    html-math-method: katex
+    code-tools: true
+    self-contained: true
+categories: ["COVID-19", "Antibodies", "Public Health"]
+image: PBjorkman-CBarnes-SARS-CoV2-Antibodies-WEB.original.jpg
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.height = 6, fig.width = 9, fig.align = "centre")
+
+library(tidyverse)
+library(janitor)
+library(lubridate)
+
+library(timevis)
+library(plotly)
+library(vembedr)
+
+theme_set(theme_minimal())
+
+```
+
+# Introduction
+
+| **Objective**: To Monitor changes in 1) neutralising antibody levels 2) rate of waning 3) days to seronegative status.
+
+## How do Antibodies Work?
+
+```{r}
+vembedr::embed_youtube(id = "qCRwuxDpthY",
+                       allowfullscreen = T) %>%
+  use_align("center")
+
+```
+
+## Neutralizing Antibodies Against Coronaviruses
+
+```{r}
+#| fig-cap: A SARS-CoV-2 S trimer bound by a neutralizing antibody.
+#| fig-subcap: Credit - C. Barnes / Björkman laboratory
+knitr::include_graphics("img/PBjorkman-CBarnes.jpg")
+```
+
+## Dr. Pamela Bjorkman
+
+```{r}
+vembedr::embed_youtube(id = "Sp1aVTj7IvI",
+                       allowfullscreen = T) %>%
+  use_align("center")
+
+```
+
+# Results
+
+```{r}
+sero_raw <- readxl::read_excel("~/Downloads/Santanu_COVID_events_research.xlsx", 
+                               sheet = "long") %>% 
+  clean_names() %>% 
+  mutate(date = ymd(date))
+
+sero <- sero_raw %>% 
+  rename(start = date,
+         content = event) %>% 
+  mutate(sero = parse_number(outcome)) %>% 
+  mutate(content = str_remove(content, "SARS-CoV-2 ANTI-SPIKE IgG ANTIBODIES")) %>% 
+  mutate(content = str_remove(content, "\\:")) %>% 
+  mutate(content = str_remove(content, "\\*"))
+
+```
+
+## Timeline
+
+```{r}
+#| column: screen
+
+sero %>% 
+  timevis()
+
+```
+
+## IgG Antibody levels over time
+
+```{r}
+fig_igg <- sero %>% 
+  filter(!is.na(sero)) %>% 
+  ggplot(aes(start, sero)) +
+  geom_line()  +
+  geom_point(aes(size = sero)) +
+  scale_x_date(labels = scales::date_format("%Y %b")) +
+  labs(title = "Trend in IgG antibody levels",
+       x = "",
+       y = "IgG Antibodies (in AU/ml)",
+       size = "") +
+  theme(legend.position = "top")
+
+ggplotly(fig_igg)
+
+```

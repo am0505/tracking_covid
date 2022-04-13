@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Tracking COVID-19",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nCOVID-19\n\n\nAntibodies\n\n\nPublic Health\n\n\n\n\nAn ongoing experiment to track antibodies over time\n\n\n\n\n\n\nApr 8, 2022\n\n\nSP, AM\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/tracking_antibodies/index.html#how-do-antibodies-work",
+    "href": "posts/tracking_antibodies/index.html#how-do-antibodies-work",
+    "title": "Tracking Antibodies",
+    "section": "How do Antibodies Work?",
+    "text": "How do Antibodies Work?\n\nvembedr::embed_youtube(id = \"qCRwuxDpthY\",\n                       allowfullscreen = T) %>%\n  use_align(\"center\")"
+  },
+  {
+    "objectID": "posts/tracking_antibodies/index.html#neutralizing-antibodies-against-coronaviruses",
+    "href": "posts/tracking_antibodies/index.html#neutralizing-antibodies-against-coronaviruses",
+    "title": "Tracking Antibodies",
+    "section": "Neutralizing Antibodies Against Coronaviruses",
+    "text": "Neutralizing Antibodies Against Coronaviruses\n\nknitr::include_graphics(\"img/PBjorkman-CBarnes.jpg\")\n\n\n\n\nCredit - C. Barnes / Björkman laboratory"
+  },
+  {
+    "objectID": "posts/tracking_antibodies/index.html#dr.-pamela-bjorkman",
+    "href": "posts/tracking_antibodies/index.html#dr.-pamela-bjorkman",
+    "title": "Tracking Antibodies",
+    "section": "Dr. Pamela Bjorkman",
+    "text": "Dr. Pamela Bjorkman\n\nvembedr::embed_youtube(id = \"Sp1aVTj7IvI\",\n                       allowfullscreen = T) %>%\n  use_align(\"center\")"
+  },
+  {
+    "objectID": "posts/tracking_antibodies/index.html#timeline",
+    "href": "posts/tracking_antibodies/index.html#timeline",
+    "title": "Tracking Antibodies",
+    "section": "Timeline",
+    "text": "Timeline\n\nsero %>% \n  timevis()\n\n\n\n+\n-"
+  },
+  {
+    "objectID": "posts/tracking_antibodies/index.html#igg-antibody-levels-over-time",
+    "href": "posts/tracking_antibodies/index.html#igg-antibody-levels-over-time",
+    "title": "Tracking Antibodies",
+    "section": "IgG Antibody levels over time",
+    "text": "IgG Antibody levels over time\n\nfig_igg <- sero %>% \n  filter(!is.na(sero)) %>% \n  ggplot(aes(start, sero)) +\n  geom_line()  +\n  geom_point(aes(size = sero)) +\n  scale_x_date(labels = scales::date_format(\"%Y %b\")) +\n  labs(title = \"Trend in IgG antibody levels\",\n       x = \"\",\n       y = \"IgG Antibodies (in AU/ml)\",\n       size = \"\") +\n  theme(legend.position = \"top\")\n\nggplotly(fig_igg)\n\n\n\n\n\n\n\n\n\nSource Code\n---\ntitle: \"Tracking Antibodies\"\nauthor: \n- name: \"SP\"\n- name: \"AM\"\ndescription: \"An ongoing experiment to track antibodies over time\"\ndate: 2022-04-08\nexecute:\n  warning: false\n  message: false\nformat:\n  html:\n    html-math-method: katex\n    code-tools: true\n    self-contained: true\ncategories: [\"COVID-19\", \"Antibodies\", \"Public Health\"]\nimage: PBjorkman-CBarnes-SARS-CoV2-Antibodies-WEB.original.jpg\n---\n\n```{r}\n#| echo: false\n#| message: false\n#| warning: false\n\n# knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.height = 6, fig.width = 9, fig.align = \"centre\")\n\nlibrary(tidyverse)\nlibrary(janitor)\nlibrary(lubridate)\n\nlibrary(timevis)\nlibrary(plotly)\nlibrary(vembedr)\n\ntheme_set(theme_minimal())\n\n```\n\n# Introduction\n\n| **Objective**: To Monitor changes in 1) neutralising antibody levels 2) rate of waning 3) days to seronegative status.\n\n## How do Antibodies Work?\n\n```{r}\nvembedr::embed_youtube(id = \"qCRwuxDpthY\",\n                       allowfullscreen = T) %>%\n  use_align(\"center\")\n\n```\n\n## Neutralizing Antibodies Against Coronaviruses\n\n```{r}\n#| fig-cap: A SARS-CoV-2 S trimer bound by a neutralizing antibody.\n#| fig-subcap: Credit - C. Barnes / Björkman laboratory\nknitr::include_graphics(\"img/PBjorkman-CBarnes.jpg\")\n```\n\n## Dr. Pamela Bjorkman\n\n```{r}\nvembedr::embed_youtube(id = \"Sp1aVTj7IvI\",\n                       allowfullscreen = T) %>%\n  use_align(\"center\")\n\n```\n\n# Results\n\n```{r}\nsero_raw <- readxl::read_excel(\"~/Downloads/Santanu_COVID_events_research.xlsx\", \n                               sheet = \"long\") %>% \n  clean_names() %>% \n  mutate(date = ymd(date))\n\nsero <- sero_raw %>% \n  rename(start = date,\n         content = event) %>% \n  mutate(sero = parse_number(outcome)) %>% \n  mutate(content = str_remove(content, \"SARS-CoV-2 ANTI-SPIKE IgG ANTIBODIES\")) %>% \n  mutate(content = str_remove(content, \"\\\\:\")) %>% \n  mutate(content = str_remove(content, \"\\\\*\"))\n\n```\n\n## Timeline\n\n```{r}\n#| column: screen\n\nsero %>% \n  timevis()\n\n```\n\n## IgG Antibody levels over time\n\n```{r}\nfig_igg <- sero %>% \n  filter(!is.na(sero)) %>% \n  ggplot(aes(start, sero)) +\n  geom_line()  +\n  geom_point(aes(size = sero)) +\n  scale_x_date(labels = scales::date_format(\"%Y %b\")) +\n  labs(title = \"Trend in IgG antibody levels\",\n       x = \"\",\n       y = \"IgG Antibodies (in AU/ml)\",\n       size = \"\") +\n  theme(legend.position = \"top\")\n\nggplotly(fig_igg)\n\n```"
+  }
+]
